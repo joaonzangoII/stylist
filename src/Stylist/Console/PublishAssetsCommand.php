@@ -41,7 +41,7 @@ class PublishAssetsCommand extends Command
      */
     protected function setupThemes()
     {
-        $this->laravel['events']->fire('stylist.publishing');
+        $this->laravel['events']->dispatch('stylist.publishing');
 
         $themes = Stylist::themes();
 
@@ -49,6 +49,7 @@ class PublishAssetsCommand extends Command
             $path = $theme->getPath();
 
             if ($this->laravel['files']->exists($path.'assets/')) {
+
                 $this->laravel['stylist']->registerPath($path);
             }
         }
